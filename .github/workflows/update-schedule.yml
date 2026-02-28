@@ -31,10 +31,25 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      - name: Update schedule
-        run: npm run update:schedule
+      - name: Update schedule (with retries)
+        shell: bash
         env:
           CI: "true"
+        run: |
+          set -e
+          for attempt in 1 2 3; do
+            echo "Update attempt $attempt/3"
+            if npm run update:schedule; then
+              echo "Update succeeded."
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "Update failed; retrying in 45 seconds..."
+              sleep 45
+            fi
+          done
+          echo "Update failed after 3 attempts."
+          exit 1
 
       - name: Commit and push changes
         run: |
