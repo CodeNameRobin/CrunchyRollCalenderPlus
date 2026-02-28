@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crunchyroll Release Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="layout">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Anime Watch Planner</p>
+        <h1>Crunchyroll Release Calendar</h1>
+      </div>
+      <div class="controls">
+        <label class="audio-filter-wrap" for="audioFilter">Audio</label>
+        <select id="audioFilter" aria-label="Audio filter"></select>
+        <label class="audio-filter-wrap" for="viewMode">View</label>
+        <select id="viewMode" aria-label="Calendar view mode">
+          <option value="month">Month</option>
+          <option value="week">Week</option>
+          <option value="day">Day</option>
+        </select>
+        <button id="prevMonth" aria-label="Previous month">Prev</button>
+        <p id="monthLabel" class="month-label" aria-live="polite"></p>
+        <button id="nextMonth" aria-label="Next month">Next</button>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div id="weekdayRow" class="weekday-row" aria-hidden="true">
+        <span>Sun</span>
+        <span>Mon</span>
+        <span>Tue</span>
+        <span>Wed</span>
+        <span>Thu</span>
+        <span>Fri</span>
+        <span>Sat</span>
+      </div>
+      <div id="calendarGrid" class="calendar-grid" aria-label="Release calendar"></div>
+    </section>
+
+    <section class="panel">
+      <div class="upcoming-header">
+        <h2>Today's Episodes</h2>
+        <p class="small">Includes aired and upcoming for today (local timezone).</p>
+      </div>
+      <ul id="upcomingList" class="upcoming-list"></ul>
+    </section>
+    <section class="panel">
+      <p id="syncMeta" class="small">Waiting for schedule sync metadata...</p>
+    </section>
+  </main>
+
+  <template id="dayCellTemplate">
+    <article class="day-cell">
+      <header>
+        <p class="day-number"></p>
+      </header>
+      <ul class="day-events"></ul>
+    </article>
+  </template>
+
+  <template id="eventTemplate">
+    <li>
+      <a class="event-link" target="_blank" rel="noopener noreferrer"></a>
+    </li>
+  </template>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

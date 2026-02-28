@@ -1,0 +1,12 @@
+{
+  "name": "crunchyroll-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "update:schedule": "node scripts/update-schedule.mjs",
+    "serve": "python -m http.server 8080"
+  },
+  "devDependencies": {
+    "playwright": "^1.53.0"
+  }
+}
