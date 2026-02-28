@@ -46,8 +46,14 @@ async function main() {
     (a, b) => new Date(a.releaseDateTime).getTime() - new Date(b.releaseDateTime).getTime(),
   );
   if (allEpisodes.length === 0) {
+    if (await fileExists(OUTPUT_FILE)) {
+      console.warn(
+        "No calendar episodes were extracted (likely Cloudflare). Keeping existing data/schedule.json and exiting without changes.",
+      );
+      return;
+    }
     throw new Error(
-      "No calendar episodes were extracted. Opened browser may have hit Cloudflare or not loaded listings.",
+      "No calendar episodes were extracted and no existing schedule file is available.",
     );
   }
 
@@ -872,3 +878,12 @@ main().catch((error) => {
   console.error(error.message);
   process.exitCode = 1;
 });
+
+async function fileExists(filePath) {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
