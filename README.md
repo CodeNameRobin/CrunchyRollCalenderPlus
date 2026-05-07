@@ -1,5 +1,5 @@
 # Crunchyroll Release Calendar
-
+# Does not work properly WIP
 Static calendar site that reads `data/schedule.json` and displays upcoming Crunchyroll episodes with clickable episode links.
 Default UI filter is `Japanese (Original)` audio, with a dropdown to switch audio tracks.
 
